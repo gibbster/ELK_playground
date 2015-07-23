@@ -4,9 +4,16 @@
 
 The goal of this repository is to understand elasticsearch, kibana, and logstash work together. This the simplest demo configuration I could come up with that separated each component into a separate container.
 
+This is _not_ intended to be used in any type of production environment. Use an official repo on docker hub for that.
+
 ## Usage
 
+Before running, be sure that docker has been correctly installed. Optionally install docker-compose
+
 ### Building and running (docker-compose)
+
+    docker-compose build
+    docker-compose up
 
 ### Building and running (manually)
 
