@@ -22,13 +22,15 @@ logstash:
    - elasticsearch:es
   environment:
    - LOGSPOUT=ignore
-  command: "bin/logstash -e 'input { tcp { port => 9000 } } output { elasticsearch { host => es } }'"
+  command: "bin/logstash -e 'input { udp { port => 9000 codec => json } } output { elasticsearch { host => es } }'"
 logspout:
-  image: gliderlabs/logspout:master
+  build: logspout
+  environment:
+   - ROUTE_URIS=logstash://ls:9000
+  links:
+   - logstash:ls
   volumes:
    - /var/run/docker.sock:/tmp/docker.sock
-  ports: 
-   - "80"
 nginx:
   image: nginx
   ports:
