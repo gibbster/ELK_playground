@@ -6,6 +6,8 @@ The goal of this repository is to understand elasticsearch, kibana, and logstash
 
 This is _not_ intended to be used in any type of production environment. Use an official repo on docker hub for that.
 
+This version uses nc as a source for logstash/elasticsearch. Use the logspout branch for a version which uses nginx as a source.
+
 ## Usage
 
 Before running, be sure that docker has been correctly installed. Optionally install docker-compose
