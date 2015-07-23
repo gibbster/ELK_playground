@@ -1,5 +1,7 @@
 elasticsearch:
   build: elasticsearch
+  environment:
+   - LOGSPOUT=ignore
   ports: 
    - "9200"
 kibana:
@@ -8,6 +10,8 @@ kibana:
    - "5601"
   volumes:
    - ./kibana/config:/kibana-4.1.1-linux-x64/config
+  environment:
+   - LOGSPOUT=ignore
   links:
    - elasticsearch:es
 logstash:
@@ -16,4 +20,17 @@ logstash:
    - "9000"
   links:
    - elasticsearch:es
+  environment:
+   - LOGSPOUT=ignore
   command: "bin/logstash -e 'input { tcp { port => 9000 } } output { elasticsearch { host => es } }'"
+logspout:
+  image: gliderlabs/logspout:master
+  volumes:
+   - /var/run/docker.sock:/tmp/docker.sock
+  ports: 
+   - "80"
+nginx:
+  image: nginx
+  ports:
+   - "80"
+
